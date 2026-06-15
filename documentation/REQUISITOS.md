@@ -156,11 +156,12 @@ No puede:
 
 Entidad sugerida: `Ticket`
 
-- `ticketNumber`: numero legible y unico del ticket
+- `_id`: identificador tecnico automatico de MongoDB
+- `ticketNumber`: numero legible y unico generado por el sistema para uso visible del cliente y soporte
 - `title`: titulo del ticket
 - `categoryId`: referencia a `Category`
 - `priorityId`: referencia a `Priority`
-- `description`: descripcion enriquecida del problema o solicitud
+- `description`: descripcion enriquecida del problema o solicitud en HTML sanitizado
 - `status`: estado operativo del ticket
 - `createdBy`: usuario que creo el ticket
 - `clientId`: cliente propietario del ticket
@@ -168,11 +169,22 @@ Entidad sugerida: `Ticket`
 - `assignedAt`: fecha de asignacion, o `null` si esta sin asignar
 - `closedAt`: fecha de cierre, o `null` si no esta cerrado
 - `closedBy`: usuario que cerro el ticket, o `null`
-- `solution`: descripcion obligatoria de la solucion cuando el ticket se cierre
-- `attachments`: lista de archivos asociados al ticket
+- `solution`: solucion del ticket en HTML sanitizado, o `null` mientras el ticket no este cerrado
+- `attachments`: no debe llevar lista embebida es simplemente un documento que el usuario carga
 - `isActive`: estado interno para soft delete
 - `createdAt`: fecha de creacion
 - `updatedAt`: fecha de ultima actualizacion
+
+Formato de `ticketNumber`:
+
+- Debe usar el formato `TCK-YYYY-NNNN`
+- `TCK` es el prefijo fijo para tickets
+- `YYYY` corresponde al anio de creacion del ticket
+- `NNNN` corresponde al consecutivo anual con minimo 4 digitos
+- Ejemplos validos: `TCK-2026-0001`, `TCK-2026-0600`, `TCK-2026-9999`
+- Si el consecutivo anual supera `9999`, puede crecer de forma natural, por ejemplo `TCK-2026-10000`
+- El cliente no debe enviar `ticketNumber` al crear tickets
+
 
 ### Estados
 
@@ -212,8 +224,9 @@ Campos opcionales:
 Reglas:
 
 - Al crear un ticket, el estado inicial debe ser `open`
-- Al crear un ticket, `assignedTo`, `assignedAt`, `closedAt`, `closedBy` y `solution` deben iniciar vacios
+- Al crear un ticket, `assignedTo`, `assignedAt`, `closedAt`, `closedBy` y `solution` deben iniciar en `null`
 - El sistema debe generar un `ticketNumber` unico
+- `description` debe guardarse como HTML sanitizado
 - Se debe enviar un correo al cliente informando que el ticket fue creado, incluyendo titulo, fecha y categoria
 
 ### Consulta de tickets
@@ -230,7 +243,7 @@ El listado debe soportar:
 
 El listado debe mostrar:
 
-- `ticketNumber` o `id`
+- `ticketNumber`
 - Categoria
 - Titulo
 - Prioridad
@@ -259,6 +272,8 @@ El detalle debe mostrar:
 - Historial de comentarios
 - Fechas relevantes
 - Solucion registrada si esta cerrado
+
+V1 no incluye historial tecnico de cambios de estado dentro del modelo `Ticket`; el historial visible se cubre con los campos principales, fechas y comentarios
 
 ### Asignacion de tickets
 
@@ -291,6 +306,7 @@ Datos requeridos:
 Reglas:
 
 - La solucion es obligatoria y no puede estar vacia
+- La solucion debe guardarse como HTML sanitizado
 - Al cerrar, se debe establecer `status` en `closed`
 - Al cerrar, se debe establecer `closedAt` y `closedBy`
 - Un ticket cerrado no puede recibir nuevos comentarios en V1
