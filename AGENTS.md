@@ -32,7 +32,7 @@ Project-specific typing rules:
 - Keep function return types explicit for exported helpers/controllers
 - Keep consistency with existing functional-style helper patterns
 - Type Mongo ids with `Types.ObjectId`
-- For literal values, define one `UPPER_SNAKE_CASE` constant with `as const`, reuse it in validators/enums, and derive aliases with `typeof value.values[number]`
+- For literal values, define one `UPPER_SNAKE_CASE` constant with `as const`, expose a Mongoose-compatible enum object with `values` and `message`, reuse that object in model schema `enum` fields, and derive aliases with `typeof value.values[number]`
 - Interfaces use `IName`; type aliases use PascalCase or UpperCamelCase
 
 Example:
@@ -54,6 +54,8 @@ Controllers must type parameters as `req: Request, res: Response, next: NextFunc
 New endpoints must follow REST resource naming and CRUD-style controller names, for example `createIrapi` instead of `calculateIrapi`; route files must not include `/v1`; versioning is configured at the root; successful POST creation responses must use `201` and should not return `ok: true` wrappers
 
 Keep required-field and business validation in `express-validator` files under `src/validators/`, not in Mongoose models; do not add `required: true` or `unique: true`; use `{ timestamps: true }` instead of manually defining `createdAt`; remove unused imports and development logs
+
+For Mongoose enum fields, call the enum object from `src/enums/<module>/` directly in the schema, for example `enum: validTicketStatus`; do not pass raw literal arrays directly in model schemas
 
 ## Testing guidelines
 
