@@ -1,0 +1,88 @@
+schema: spec-driven
+
+context: |
+  Tipo de proyecto: API REST con Node.js/Express escrita principalmente en TypeScript
+  Dominio: API de piscinas y plantas
+  El codigo fuente vive en src/
+
+  Estructura principal:
+  - src/index.ts inicia el servidor
+  - src/controllers/ contiene controladores HTTP
+  - src/routes/v1/ contiene archivos de rutas versionadas
+  - src/models/ contiene modelos Mongoose
+  - src/validators/ contiene reglas de validacion con express-validator
+  - src/helpers/ contiene helpers reutilizables de dominio
+  - src/interfaces/ contiene interfaces TypeScript compartidas
+  - src/typeAlias/ contiene type aliases TypeScript compartidos
+  - src/swagger/ contiene documentacion modular OpenAPI
+
+  Stack tecnico:
+  - Node.js
+  - Express
+  - TypeScript
+  - Mongoose
+  - express-validator
+  - autenticacion JWT
+
+  Comandos de desarrollo:
+  - npm run dev inicia la API con nodemon y ts-node desde src/index.ts
+  - npm run watch ejecuta TypeScript en watch mode
+  - npx tsc --noEmit valida tipos del proyecto sin escribir dist/
+  - Actualmente no hay script npm test definido
+
+  Convenciones TypeScript:
+  - Usar tipos TypeScript explicitos
+  - No usar any
+  - Evitar as; preferir tipado correcto y narrowing
+  - Tipar variables importantes explicitamente, especialmente resultados Mongoose
+  - Mantener tipos de retorno explicitos en helpers y controladores exportados
+  - Tipar ids Mongo con Types.ObjectId
+  - Las interfaces usan nomenclatura IName
+  - Los type aliases usan PascalCase o UpperCamelCase
+  - Ubicar interfaces solo en src/interfaces/<module>/
+  - Ubicar type aliases solo en src/typeAlias/<module>/
+
+  Convenciones API:
+  - Los controladores usan req: Request, res: Response, next: NextFunction
+  - Los catch de controladores usan catch (err: unknown)
+  - No llamar next(err) desde catch de controladores
+  - Manejar MongooseError.ValidationError cuando aplique
+  - Los endpoints nuevos siguen nombres de recursos REST
+  - Se prefieren nombres de controladores estilo CRUD, por ejemplo createIrapi en vez de calculateIrapi
+  - Los archivos de rutas no deben incluir /v1 porque el versionado se configura en la raiz
+  - Las respuestas exitosas de creacion POST usan 201
+  - No retornar wrappers ok: true en respuestas exitosas de creacion
+
+  Convenciones de modelos y validacion:
+  - Mantener validacion de campos requeridos y reglas de negocio en archivos express-validator bajo src/validators/
+  - No agregar required: true ni unique: true en modelos Mongoose
+  - Usar timestamps: true en vez de definir createdAt manualmente
+  - Eliminar imports no usados y logs de desarrollo
+
+  Seguridad:
+  - Usar .env.example como referencia para variables de entorno requeridas
+  - No commitear secretos reales desde .env
+  - La autenticacion depende de la configuracion JWT
+
+rules:
+  proposal:
+    - Mantener las propuestas enfocadas en una sola capacidad o cambio
+    - Mencionar recursos API y workflows afectados cuando sea relevante
+    - Incluir non-goals cuando el alcance pueda ser ambiguo
+    - No proponer detalles de implementacion que entren en conflicto con las convenciones del proyecto
+
+  design:
+    - Describir impactos en controller, route, validator, model, helper y swagger cuando sea relevante
+    - Preferir patrones existentes del proyecto antes que abstracciones nuevas
+    - Explicar decisiones de tipado TypeScript para resultados Mongoose, ObjectIds, interfaces y type aliases
+
+  specs:
+    - Escribir requirements como comportamiento observable de API o sistema
+    - Incluir scenarios de exito, errores de validacion, autorizacion y edge cases relevantes
+    - Mantener specs independientes de implementacion de bajo nivel salvo que el comportamiento lo requiera
+
+  tasks:
+    - Dividir el trabajo en checklist items de tamano implementable
+    - Incluir actualizaciones de validators y swagger docs cuando cambien endpoints
+    - Incluir npx tsc --noEmit como verificacion minima
+    - Para cambios API, incluir verificacion manual de endpoints con payloads realistas
