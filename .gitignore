@@ -5,3 +5,6 @@ coverage/
 npm-debug.log*
 notesDev/
 .cursor/rules/
+.agents/
+skills-lock.json
+specs/
