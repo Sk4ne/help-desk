@@ -67,14 +67,16 @@ Crea un archivo `.env` en la raíz del proyecto usando `.env.example` como refer
 ```env
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017/helpdesk
-SECRET_JWT_SEED=your_secret_key
+JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=1h
 ```
 
 Variables disponibles:
 
 - `PORT`: puerto donde se levanta la API
 - `MONGODB_URI`: cadena de conexión de MongoDB
-- `SECRET_JWT_SEED`: semilla usada para firmar tokens JWT cuando se implemente autenticación
+- `JWT_SECRET`: secreto usado para firmar tokens JWT cuando se implemente autenticación
+- `JWT_EXPIRES_IN`: tiempo de expiración de los tokens JWT
 
 ## Scripts disponibles
 
