@@ -1,29 +1,29 @@
-## 1. Dependencies
+## 1. Dependencias
 
-- [x] 1.1 Install runtime dependency `cors`
-- [x] 1.2 Install development dependency `@types/cors`
-- [x] 1.3 Confirm `package-lock.json` reflects the installed dependency tree
+- [x] 1.1 Instalar la dependencia de runtime `cors`
+- [x] 1.2 Instalar la dependencia de desarrollo `@types/cors`
+- [x] 1.3 Confirmar que `package-lock.json` refleja el arbol de dependencias instalado
 
-## 2. Database connection
+## 2. Conexion a base de datos
 
-- [x] 2.1 Create `src/db/connectToDb.ts`
-- [x] 2.2 Implement exported `connectToDatabase` function with explicit `Promise<void>` return type
-- [x] 2.3 Read `MONGODB_URI` from environment configuration and report a clear error when missing
-- [x] 2.4 Connect to MongoDB using Mongoose
-- [x] 2.5 Execute `connectToDatabase()` when the DB module loads
+- [x] 2.1 Crear `src/db/connectToDb.ts`
+- [x] 2.2 Implementar la funcion exportada `connectToDatabase` con tipo de retorno explicito `Promise<void>`
+- [x] 2.3 Leer `MONGODB_URI` desde la configuracion de entorno y reportar un error claro cuando falte
+- [x] 2.4 Conectar a MongoDB usando Mongoose
+- [x] 2.5 Ejecutar `connectToDatabase()` cuando cargue el modulo de DB
 
-## 3. API entrypoint
+## 3. Entrypoint de API
 
-- [x] 3.1 Import dotenv, Express, Morgan, CORS and `./db/connectToDb` in `src/index.ts`
-- [x] 3.2 Initialize Express in a typed `app` variable
-- [x] 3.3 Register `express.json()`, Morgan and CORS configured for `http://localhost:5127`
-- [x] 3.4 Trigger database connection by importing `./db/connectToDb`
-- [x] 3.5 Remove the `startServer` wrapper function and any equivalent startup wrapper
-- [x] 3.6 Start `app.listen` using `process.env.PORT || 3000` directly in the listener call
-- [x] 3.7 Log `Api escuchando en el puerto <port>` when the server starts
+- [x] 3.1 Importar dotenv, Express, Morgan, CORS y `./db/connectToDb` en `src/index.ts`
+- [x] 3.2 Inicializar Express en una variable tipada `app`
+- [x] 3.3 Registrar `express.json()`, Morgan y CORS configurado para `http://localhost:5127`
+- [x] 3.4 Disparar la conexion a base de datos importando `./db/connectToDb`
+- [x] 3.5 Eliminar la funcion envoltorio `startServer` y cualquier envoltorio equivalente de arranque
+- [x] 3.6 Iniciar `app.listen` usando `process.env.PORT || 3000` directamente en la llamada del listener
+- [x] 3.7 Registrar `Api escuchando en el puerto <port>` cuando inicia el servidor
 
-## 4. Verification
+## 4. Verificacion
 
-- [x] 4.1 Run `npx tsc --noEmit`
-- [x] 4.2 Run `npm run build`
-- [x] 4.3 Run `npm run dev` with realistic local environment values and confirm the server imports the DB module and starts the listener
+- [x] 4.1 Ejecutar `npx tsc --noEmit`
+- [x] 4.2 Ejecutar `npm run build`
+- [x] 4.3 Ejecutar `npm run dev` con valores de entorno locales realistas y confirmar que el servidor importa el modulo de DB e inicia el listener
