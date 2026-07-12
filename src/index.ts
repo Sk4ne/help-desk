@@ -4,8 +4,13 @@ import './db/connectToDb';
 import cors from 'cors';
 import express, { type Application } from 'express';
 import morgan from 'morgan';
+/* Rutas v1 */
+import router from './routes/v1'
 
 const app: Application = express();
+
+//Middleware de rutas
+app.use('/v1', router)
 
 app.use(express.json());
 app.use(morgan('dev'));
