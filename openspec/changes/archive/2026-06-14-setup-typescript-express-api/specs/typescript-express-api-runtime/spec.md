@@ -1,55 +1,55 @@
 ## ADDED Requirements
 
-### Requirement: Runtime dependencies are available
+### Requirement: Dependencias de runtime disponibles
 El proyecto SHALL incluir Express, Mongoose, Morgan y dotenv como dependencias de runtime para que la API tenga disponibles las librerias base cuando se defina su inicializacion
 
-#### Scenario: Runtime dependencies are installed
+#### Scenario: Dependencias de runtime instaladas
 - **WHEN** se instalan las dependencias desde `package.json`
 - **THEN** `express`, `mongoose`, `morgan` y `dotenv` estan disponibles para importar desde archivos TypeScript
 
-### Requirement: TypeScript development tooling is available
+### Requirement: Herramientas de desarrollo TypeScript disponibles
 El proyecto SHALL incluir herramientas de desarrollo TypeScript y paquetes de tipos necesarios para ejecutar y validar la API durante el desarrollo
 
-#### Scenario: Development tooling is installed
+#### Scenario: Herramientas de desarrollo instaladas
 - **WHEN** se instalan las dependencias desde `package.json`
 - **THEN** `typescript`, `ts-node`, `nodemon`, `@types/node`, `@types/express` y `@types/morgan` estan disponibles para desarrollo local
 
-### Requirement: TypeScript compiler is configured
+### Requirement: Compilador TypeScript configurado
 El proyecto SHALL incluir una configuracion TypeScript que compile archivos fuente desde `src/` y soporte chequeo estricto de tipos para el codigo de la API
 
-#### Scenario: Type checking succeeds for the base project
+#### Scenario: Chequeo de tipos exitoso para el proyecto base
 - **WHEN** se ejecuta `npx tsc --noEmit` despues de la instalacion
 - **THEN** TypeScript valida el proyecto configurado sin emitir salida de build
 
-#### Scenario: Build emits compiled output
+#### Scenario: Build emite salida compilada
 - **WHEN** se ejecuta el script de build
 - **THEN** TypeScript compila archivos desde `src/` hacia el directorio de salida configurado
 
-### Requirement: Development scripts are available
+### Requirement: Scripts de desarrollo disponibles
 El proyecto SHALL exponer scripts npm para ejecutar el flujo de desarrollo TypeScript, correr TypeScript en modo watch, generar build de produccion y validar tipos
 
-#### Scenario: Development script uses TypeScript runner
+#### Scenario: Script de desarrollo usa runner TypeScript
 - **WHEN** se ejecuta `npm run dev`
 - **THEN** el proyecto usa `nodemon` y `ts-node` para ejecutar el flujo de desarrollo TypeScript configurado
 
-#### Scenario: Watch script runs TypeScript in watch mode
+#### Scenario: Script watch ejecuta TypeScript en modo watch
 - **WHEN** se ejecuta `npm run watch`
 - **THEN** TypeScript inicia en modo watch para el proyecto configurado
 
-#### Scenario: Type-check script validates without output
+#### Scenario: Script type-check valida sin salida
 - **WHEN** se ejecuta el script de type-check
 - **THEN** TypeScript valida el proyecto usando `--noEmit`
 
-### Requirement: Runtime entrypoint implementation is deferred
+### Requirement: Implementacion del entrypoint de runtime diferida
 El proyecto SHALL mantener la implementacion concreta de `src/index.ts` fuera de este cambio para que sea definida por una especificacion posterior
 
-#### Scenario: Entry point implementation is not specified
+#### Scenario: Implementacion del entrypoint no especificada
 - **WHEN** se revisa este cambio
 - **THEN** no define middlewares, listener HTTP, conexion Mongoose ni manejo de arranque dentro de `src/index.ts`
 
-### Requirement: Environment example documents base configuration
+### Requirement: Ejemplo de entorno documenta configuracion base
 El proyecto SHALL documentar variables de entorno base sin exigir desde esta spec como deben ser consumidas por la aplicacion
 
-#### Scenario: Environment variables are documented
+#### Scenario: Variables de entorno documentadas
 - **WHEN** un desarrollador lee `.env.example`
 - **THEN** el archivo lista las variables base esperadas para desarrollo sin contener secretos reales
