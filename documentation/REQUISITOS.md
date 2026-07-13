@@ -368,11 +368,8 @@ Reglas:
 
 Campos sugeridos:
 
-- `name`
-- `description`
-- `isActive`
-- `createdAt`
-- `updatedAt`
+- `name` : puede usar estos valores: peticion de servicio o incidencia
+- `status`: boolean para activar o inactivar la categoria
 
 ### Priority
 
