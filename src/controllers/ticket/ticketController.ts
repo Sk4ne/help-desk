@@ -1,4 +1,4 @@
-import { Request,Response, NextFunction } from "express";
+import { type NextFunction, type Request, type Response } from 'express';
 
 export const addTicket = (req:Request, res:Response, next: NextFunction) => {
   try {
