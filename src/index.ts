@@ -8,11 +8,11 @@ import morgan from 'morgan';
 import router from './routes/v1'
 
 const app: Application = express();
+app.use(express.json());
 
 //Middleware de rutas
 app.use('/v1', router)
 
-app.use(express.json());
 app.use(morgan('dev'));
 app.use(
   cors({
