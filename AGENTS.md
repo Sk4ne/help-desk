@@ -49,7 +49,14 @@ Follow existing naming patterns: models use PascalCase, helpers/functions use ca
 
 ## API, controllers, and models
 
-Controllers must type parameters as `req: Request, res: Response, next: NextFunction` and use `catch (err: unknown)`; handle `MongooseError.ValidationError` when relevant, then return a typed fallback error message; do not call `next(err)` from controller catches
+Controllers must type parameters as `req: Request, res: Response, next: NextFunction` and use `catch (err: unknown)`; handle `MongooseError.ValidationError` when relevant, then return fallback errors using this exact typed pattern; do not call `next(err)` from controller catches
+
+```ts
+const errorMessage: string = err instanceof Error ? err.message : 'Error interno del servidor';
+return res.status(500).json({
+  msg: errorMessage
+});
+```
 
 New endpoints must follow REST resource naming and CRUD-style controller names, for example `createIrapi` instead of `calculateIrapi`; route files must not include `/v1`; versioning is configured at the root; successful POST creation responses must use `201` and should not return `ok: true` wrappers
 
