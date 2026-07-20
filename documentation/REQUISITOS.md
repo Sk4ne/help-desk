@@ -375,12 +375,10 @@ Campos sugeridos:
 
 Campos sugeridos:
 
-- `name`
-- `level`
-- `description`
-- `isActive`
-- `createdAt`
-- `updatedAt`
+- `level`: puede usar estos valores: `low`, `medium`, `high` o `urgent`
+- `isActive`: boolean para activar o inactivar la prioridad
+- `createdAt`: fecha de creacion automatica
+- `updatedAt`: fecha de actualizacion automatica
 
 Prioridades iniciales sugeridas:
 
