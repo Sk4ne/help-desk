@@ -29,6 +29,7 @@ Project-specific typing rules:
 - Do not use `any`
 - Avoid `as`; prefer correct typing and narrowing
 - Type important variables explicitly, especially Mongoose results
+- For Mongoose models, use the inferred type from `model<IInterface>(...)`; do not annotate exports as `Model<IInterface>` or import `Model` solely for that annotation
 - Keep function return types explicit for exported helpers/controllers
 - Keep consistency with existing functional-style helper patterns
 - Type Mongo ids with `Types.ObjectId`
